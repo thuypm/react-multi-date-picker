@@ -7,6 +7,7 @@ export default function selectDate(
   {
     multiple,
     range,
+    rangeWithExclude,
     selectedDate,
     onlyMonthPicker,
     onlyYearPicker,
@@ -18,11 +19,12 @@ export default function selectDate(
   date.setFormat(format);
 
   let focused = new DateObject(date);
-
   if (multiple) {
     selectedDate = selectMultiple();
   } else if (range) {
     selectedDate = selectRange();
+  } else if (rangeWithExclude) {
+    selectedDate = selectRangeWithExclude();
   } else {
     selectedDate = focused;
   }
@@ -43,6 +45,19 @@ export default function selectDate(
     if (sort) dates.sort((a, b) => a - b);
 
     return dates;
+  }
+  function selectRangeWithExclude() {
+    if (selectedDate.length === 1) {
+      const listStartEnd = [...selectedDate, focused].sort((a, b) => a - b);
+      let listDays = [];
+      const day = new Date(listStartEnd[0].toDate().getTime());
+      const endDate = new Date(listStartEnd[1].toDate().getTime());
+      while (day <= endDate) {
+        listDays.push(new DateObject(day));
+        day.setDate(day.getDate() + 1);
+      }
+      return listDays;
+    } else return [focused];
   }
 
   function selectRange() {

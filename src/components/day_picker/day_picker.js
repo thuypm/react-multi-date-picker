@@ -123,7 +123,6 @@ export default function DayPicker({
                       className={parentClassName}
                       onClick={() => {
                         if (!mustDisplayDay(object) || object.disabled) return;
-
                         selectDay(object, monthIndex, numberOfMonths);
                       }}
                     >
@@ -180,7 +179,6 @@ export default function DayPicker({
     }
 
     [selectedDate, focused] = selectDate(dateObject, sort, state);
-
     onChange(selectedDate, {
       ...state,
       date,

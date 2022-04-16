@@ -29,6 +29,7 @@ function Calendar(
     onlyYearPicker,
     range = false,
     multiple = false,
+    rangeWithExclude = false,
     className,
     weekDays,
     months,
@@ -90,9 +91,8 @@ function Calendar(
     onlyYearPicker
   )
     numberOfMonths = 1;
-
-  if (multiple || range || isArray(value)) {
-    if (!range && !multiple) multiple = true;
+  if (multiple || range || rangeWithExclude || isArray(value)) {
+    if (!range && !multiple && !rangeWithExclude) multiple = true;
     if (multiple && range) multiple = false;
   }
 
@@ -205,6 +205,7 @@ function Calendar(
         date,
         selectedDate,
         multiple,
+        rangeWithExclude,
         range,
         onlyMonthPicker,
         onlyYearPicker,
@@ -422,10 +423,8 @@ function Calendar(
       if (listeners.change)
         listeners.change.forEach((callback) => callback(selectedDate));
     }
-
     if (state) setState(state);
     if (selectedDate || selectedDate === null) onChange?.(selectedDate);
-
     handlePropsChange({ value: selectedDate });
   }
 
@@ -440,7 +439,6 @@ function Calendar(
     };
 
     delete allProps.onPropsChange;
-
     onPropsChange?.(allProps);
   }
 

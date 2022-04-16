@@ -31,6 +31,7 @@ export default function DatePanel({
     {
       multiple,
       range,
+      rangeWithExclude,
       inRangeDates,
       selectedDate,
       date: { locale },
@@ -38,8 +39,7 @@ export default function DatePanel({
     classNames = ["rmdp-panel", position, getBorderClass(position, nodes)];
 
   locale = locale.name.split("_")[1];
-
-  if (multiple || (range && !eachDaysInRange)) {
+  if (multiple || (range && !eachDaysInRange) || rangeWithExclude) {
     dates = (inRangeDates || selectedDate).map((date, index) => {
       return {
         date,
@@ -152,7 +152,6 @@ export default function DatePanel({
 
   function selectDate(date, index) {
     handleClick(date ? selectedDate[index] : undefined);
-
     if (!date) return;
 
     setState({
@@ -166,8 +165,7 @@ export default function DatePanel({
 
   function deSelect(index) {
     let dates, focused;
-
-    if (range || multiple) {
+    if (range || multiple || rangeWithExclude) {
       dates = selectedDate.filter((d, i) => i !== index);
       focused = dates.find((d) => d.valueOf() === state.focused?.valueOf?.());
     } else {

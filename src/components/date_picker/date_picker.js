@@ -31,6 +31,7 @@ function DatePicker(
     onChange,
     range = false,
     multiple = false,
+    rangeWithExclude = false,
     name,
     id,
     title,
@@ -56,7 +57,7 @@ function DatePicker(
     onOpen,
     onClose,
     arrowClassName = "",
-    zIndex = 100,
+    zIndex = 2900,
     arrow = true,
     fixMainPosition,
     onPositionChange,
@@ -369,6 +370,7 @@ function DatePicker(
         value={temporaryDate || date}
         onChange={handleChange}
         range={range}
+        rangeWithExclude={rangeWithExclude}
         multiple={multiple}
         calendar={calendar}
         locale={locale}
