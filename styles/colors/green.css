@@ -1,9 +1,9 @@
 :root {
-  --rmdp-primary-green: #3d9970;
+  --rmdp-primary-green: #009999;
   --rmdp-secondary-green: #87ad92;
   --rmdp-shadow-green: #87ad92;
-  --rmdp-today-green: #01ff70;
-  --rmdp-hover-green: #2ecc40;
+  --rmdp-today-green: #0ce197;
+  --rmdp-hover-green: #2ba8a8;
   --rmdp-deselect-green: #39795c;
 }
 
